@@ -20,7 +20,7 @@ bot.on("message", msg => {
 
     let args = msg.content.substring(1).split(" ");
 
-    switch(args[0]) {
+    switch (args[0]) {
 
       case "vaq":
         msg.channel.send("Coders!");
@@ -33,7 +33,18 @@ bot.on("message", msg => {
       case "compliment":
         msg.channel.send(`${msg.author.username} is the hottest person alive! :heart:`);
         break;
-
+        
+      case "goodnight":
+        const rndMsg = randomSelect([
+          ¨Good night¨,
+          ¨Sweet dreams¨,
+          ¨Sleep tight¨,
+          ¨Don´t let the vaq bugs bite¨,
+          ¨\*good night kiss\*¨
+        ]);
+        msg.channel.send(`${rndMsg}, ${msg.author.username}! :sleeping:`);
+        break;
+        
       case "love":
         msg.channel.send(":heart:");
         break;
@@ -57,8 +68,8 @@ bot.on("message", msg => {
       */
 
       case "food":
-        let gimmePossibleFoods = getEmoji("food");
-        let gimmeFood = gimmePossibleFoods[Math.floor(Math.random() * gimmePossibleFoods.length)];
+        const gimmePossibleFoods = getEmoji("food");
+        const gimmeFood = randomSelect(gimmePossibleFoods);
         msg.channel.send(`Here's some ${gimmeFood.name}, ${msg.author.username}. ${emoji[366].char} ${gimmeFood.char}`);
         break;
 
@@ -70,6 +81,7 @@ bot.on("message", msg => {
 
 // Helper Functions
 const getEmoji = keyword => emoji.filter(item => item.keywords.includes(keyword));
+const randomSelect = arr => arr[Math.floor(Math.random() * arr.length)];
 
 // This must be this way!
 bot.login(process.env.BOT_TOKEN);
